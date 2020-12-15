@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DrawShapes</string>
+    <string-array name="colors">
+        <item>000000</item>
+        <item>ff0000</item>
+    </string-array>
+    <string name="rect">Rect</string>
+    <string name="triangle">Triangle</string>
+    <string name="undo">Undo</string>
+    <string name="draw">Draw</string>
+    <string name="move">Move</string>
+    <string name="circle">Circle</string>
+</resources>
