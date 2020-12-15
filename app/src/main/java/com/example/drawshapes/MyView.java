@@ -15,13 +15,21 @@ import androidx.annotation.Nullable;
 
 public class MyView extends View {
     private final static int MAX_POINTS = 5;
+    public static final String TYPE_RECT = "rect";
+    //    public static final String TYPE_RECT = "rect";
     int width;
     int height;
     int sizeGrid = 48;
     float density;
 
+    String typeShape = TYPE_RECT;
+    String color = "000000";
+
     int counterPoints;
     PointF[] points = new PointF[MAX_POINTS];
+
+    int counterRect;
+    Rect[] rects = new Rect[100];
 
     public MyView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -50,6 +58,7 @@ public class MyView extends View {
 
         drawGrid(canvas);
         drawPoints(canvas);
+        drawRects(canvas);
     }
 
     private void drawGrid(Canvas canvas) {
@@ -68,6 +77,15 @@ public class MyView extends View {
         for (int i = 1; i <= numBlockHeight; i++) {
             int y = i * sizeGrid;
             canvas.drawLine(0, y, xStop, y, paint);
+        }
+    }
+
+    void drawRects(Canvas canvas) {
+        Paint paint = new Paint();
+
+        for (int i = 0; i < counterRect; i++) {
+            Rect rect = rects[i];
+            rect.draw(canvas, paint);
         }
     }
 
@@ -91,12 +109,30 @@ public class MyView extends View {
 //            this.invalidate();
             float x = event.getX();
             float y = event.getY();
-            if (counterPoints < MAX_POINTS ) {
+            if (counterPoints < MAX_POINTS) {
                 points[counterPoints] = new PointF(x, y);
                 counterPoints++;
+
+                switch (this.typeShape) {
+                    case TYPE_RECT: checkPointsForCreateRect();
+                }
+
                 this.invalidate();
             }
         }
         return true;
+    }
+
+    private void checkPointsForCreateRect() {
+        if (counterPoints >= 2) {
+            // создаем прямоугольник
+            Rect rect = new Rect(this.color, points[0], points[1]);
+
+            rects[counterRect] = rect;
+            counterRect++;
+
+            counterPoints = 0;
+            this.invalidate();
+        }
     }
 }
