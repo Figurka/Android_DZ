@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 public class MyView extends View {
     private final static int MAX_POINTS = 5;
     public static final String TYPE_RECT = "rect";
+    public static final String TYPE_CIRCLE = "circle";
     //    public static final String TYPE_RECT = "rect";
     int width;
     int height;
@@ -30,6 +31,14 @@ public class MyView extends View {
 
     int counterRect;
     Rect[] rects = new Rect[100];
+
+    int counterCircles;
+    Circle[] circles = new Circle[100];
+
+    int counterShapes;
+    Shape[] shapes = new Shape[100];
+
+
 
     public MyView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -58,7 +67,9 @@ public class MyView extends View {
 
         drawGrid(canvas);
         drawPoints(canvas);
-        drawRects(canvas);
+//        drawRects(canvas);
+//        drawCircle(canvas);
+        drawShapes(canvas);
     }
 
     private void drawGrid(Canvas canvas) {
@@ -80,14 +91,31 @@ public class MyView extends View {
         }
     }
 
-    void drawRects(Canvas canvas) {
+    void drawShapes(Canvas canvas) {
         Paint paint = new Paint();
 
-        for (int i = 0; i < counterRect; i++) {
-            Rect rect = rects[i];
-            rect.draw(canvas, paint);
+        for (int i = 0; i < counterShapes; i++) {
+            Shape shape = shapes[i];
+            shape.draw(canvas, paint);
         }
     }
+
+//    void drawRects(Canvas canvas) {
+//        Paint paint = new Paint();
+//
+//        for (int i = 0; i < counterRect; i++) {
+//            Rect rect = rects[i];
+//            rect.draw(canvas, paint);
+//        }
+//    }
+//
+//    void drawCircle(Canvas canvas) {
+//        Paint paint = new Paint();
+//
+//        for (int i = 0; i < counterCircles; i++) {
+//            circles[i].draw(canvas, paint);
+//        }
+//    }
 
     void drawPoints(Canvas canvas) {
         Paint paint = new Paint();
@@ -114,7 +142,8 @@ public class MyView extends View {
                 counterPoints++;
 
                 switch (this.typeShape) {
-                    case TYPE_RECT: checkPointsForCreateRect();
+                    case TYPE_RECT: checkPointsForCreateRect(); break;
+                    case TYPE_CIRCLE: checkPointsForCreateCircle(); break;
                 }
 
                 this.invalidate();
@@ -123,13 +152,27 @@ public class MyView extends View {
         return true;
     }
 
+    private void checkPointsForCreateCircle() {
+        if (counterPoints >= 2) {
+            float a = points[1].x - points[0].x;
+            float b = points[1].y - points[0].y;
+            float radius = (float)Math.sqrt( Math.pow(a, 2) + Math.pow(b, 2) );
+            Circle circle = new Circle(this.color, points[0], radius);
+            shapes[counterShapes] = circle;
+            counterShapes++;
+
+            counterPoints = 0;
+            this.invalidate();
+        }
+    }
+
     private void checkPointsForCreateRect() {
         if (counterPoints >= 2) {
             // создаем прямоугольник
             Rect rect = new Rect(this.color, points[0], points[1]);
 
-            rects[counterRect] = rect;
-            counterRect++;
+            shapes[counterShapes] = rect;
+            counterShapes++;
 
             counterPoints = 0;
             this.invalidate();

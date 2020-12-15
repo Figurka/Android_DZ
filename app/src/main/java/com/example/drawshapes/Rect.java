@@ -5,13 +5,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
-public class Rect {
-    String color;
+public class Rect extends Shape {
     PointF cornerLT;
     PointF cornerRB;
 
     public Rect(String color, PointF cornerLT, PointF cornerRB) {
-        this.color = color;
+        super(color);
+
         this.cornerLT = cornerLT;
         this.cornerRB = cornerRB;
     }
