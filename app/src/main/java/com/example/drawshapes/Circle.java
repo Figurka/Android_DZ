@@ -16,6 +16,7 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
+    @Override
     void draw(Canvas canvas, Paint paint) {
         paint.setColor(Color.parseColor("#" + color));
         canvas.drawCircle(center.x, center.y, radius, paint);

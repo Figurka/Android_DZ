@@ -3,7 +3,7 @@ package com.example.drawshapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Shape {
+abstract public class Shape {
     String color;
 
 
@@ -11,6 +11,5 @@ public class Shape {
         this.color = color;
     }
 
-    void draw(Canvas canvas, Paint paint) {
-    }
+    abstract void draw(Canvas canvas, Paint paint);
 }

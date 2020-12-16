@@ -169,6 +169,7 @@ public class MyView extends View {
     private void checkPointsForCreateRect() {
         if (counterPoints >= 2) {
             // создаем прямоугольник
+//            Shape shape= new Shape("000000");
             Rect rect = new Rect(this.color, points[0], points[1]);
 
             shapes[counterShapes] = rect;
