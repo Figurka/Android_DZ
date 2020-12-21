@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
 
 public class Circle extends Shape {
     PointF center;
@@ -20,5 +21,6 @@ public class Circle extends Shape {
     void draw(Canvas canvas, Paint paint) {
         paint.setColor(Color.parseColor("#" + color));
         canvas.drawCircle(center.x, center.y, radius, paint);
+
     }
 }

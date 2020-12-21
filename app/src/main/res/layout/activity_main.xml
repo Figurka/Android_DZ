@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:saveEnabled="true"
     tools:context=".MainActivity">
 
     <RadioGroup
@@ -29,7 +30,7 @@
     </RadioGroup>
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/shapes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -63,8 +64,8 @@
         android:layout_height="48dp"
         android:layout_marginStart="64dp"
         android:entries="@array/colors"
-        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintBottom_toBottomOf="@+id/shapes"
+        app:layout_constraintStart_toEndOf="@+id/shapes"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -77,8 +78,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.drawshapes.MyView
+        android:id="@+id/myView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:saveEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
